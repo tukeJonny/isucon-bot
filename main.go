@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	LOG_PATH = "./bench.log"
+	LOG_PATH = "/home/isucon/go/src/github.com/tukejonny/isucon-bot/bench.log"
 )
 
 func init() {
