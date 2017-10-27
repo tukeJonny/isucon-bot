@@ -34,7 +34,7 @@ func (result *BenchResult) GetSlackMsg() slack.SlackMsg {
 	msg = msg + fmt.Sprintf("[Benchmark %s ~ %s]", result.StartAt.String(), result.EndAt.String()) + "\n"
 	msg = msg + fmt.Sprintf("[JobID for %s]: ", result.IpAddrs) + result.JobID
 	msg = msg + "[LoadLevel]: " + strconv.FormatInt(result.LoadLevel, 10) + "\n"
-	msg = msg + "[Score]: " + result.Score + "\n"
+	msg = msg + "[Score]: " + strconv.FormatInt(result.Score, 10) + "\n"
 	msg = msg + "[Message]: " + result.Message + "\n"
 
 	log := ""

@@ -21,7 +21,7 @@ type SlackMsgParams struct {
 	Log    string // エラーログなど
 }
 
-func NewSlackMsg(params SlackMsgParams) *SlackMsg {
+func NewSlackMsg(params SlackMsgParams) SlackMsg {
 	var color string // カラーコード
 	if params.Result {
 		// ベンチマーク成功
@@ -30,7 +30,8 @@ func NewSlackMsg(params SlackMsgParams) *SlackMsg {
 		// ベンチマーク失敗
 		color = FAIL_COLOR
 	}
-	attachments := []AttachMent{
+
+	attachments := []Attachment{
 		{
 			Title: params.Title,
 			Text:  params.Text,
@@ -41,7 +42,8 @@ func NewSlackMsg(params SlackMsgParams) *SlackMsg {
 			Text:  params.Log,
 		},
 	}
-	return &SlackMsg{
+
+	return SlackMsg{
 		Text:        "ちっちゃくないもん！",
 		Username:    SLACK_USERNAME,
 		IconUrl:     SLACK_ICON_URL,
