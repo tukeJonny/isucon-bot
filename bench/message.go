@@ -39,9 +39,9 @@ func (result *BenchResult) GetSlackMsg() slack.SlackMsg {
 
 	log := ""
 	log = log + "[ERROR LOG]\n"
-	log = log + strings.Join(result.Error, "\n")
+	log = log + strings.Join(result.Error[:logLimit], "\n")
 	log = log + "[LOG]\n"
-	log = log + strings.Join(result.Log, "\n")
+	log = log + strings.Join(result.Log[:logLimit], "\n")
 
 	return slack.NewSlackMsg(slack.SlackMsgParams{
 		Title:  title,
