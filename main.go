@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"net/http"
 	"os"
 
@@ -18,14 +17,12 @@ const (
 func init() {
 	log.SetFormatter(&log.JSONFormatter{})
 
-	fd, err := os.OpenFile(LOG_PATH, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	fd, err := os.OpenFile(LOG_PATH, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0755)
 	if err != nil {
 		slack.NotifyErr(err, "logger:main.go", "init", "ログファイルを開けませんでした")
 		panic(err)
 	}
-
-	writer := bufio.NewWriter(fd)
-	log.SetOutput(writer)
+	log.SetOutput(fd)
 
 	log.SetLevel(log.DebugLevel)
 }
