@@ -22,7 +22,7 @@ var (
 func benchmark(target string) {
 	// Execute benchmark
 	os.Chdir(basePath)
-	_, err := exec.Command("./bin/bench", "-remotes", "192.168.0.10", "-output", "result.json").Output()
+	_, err := exec.Command("./bin/bench", "-remotes", target, "-output", "result.json").Output()
 	if err != nil {
 		slack.NotifyErr(err, "handlers.go", "benchmark", "ベンチマーク実行中にエラーが起きました")
 		panic(err)
