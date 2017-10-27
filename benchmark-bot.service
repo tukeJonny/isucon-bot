@@ -4,6 +4,7 @@ Description = isucon7q bench
 [Service]
 User = isucon
 Group = isucon
+<<<<<<< HEAD
 ExecStart = /home/isucon/go/src/github.com/tukejonny/bot/bot
 Restart = always
 Type = simple
