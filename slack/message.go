@@ -15,10 +15,10 @@ type SlackMsg struct {
 }
 
 type SlackMsgParams struct {
-	Title string // メッセージのタイトル(ex. Benchmark passed!)
-	Text  string // メッセージ本文
-	Result bool  // ベンチマークが成功したか否か
-	Log string  // エラーログなど
+	Title  string // メッセージのタイトル(ex. Benchmark passed!)
+	Text   string // メッセージ本文
+	Result bool   // ベンチマークが成功したか否か
+	Log    string // エラーログなど
 }
 
 func NewSlackMsg(params SlackMsgParams) *SlackMsg {
@@ -38,14 +38,14 @@ func NewSlackMsg(params SlackMsgParams) *SlackMsg {
 		},
 		{
 			Title: "- logs - ",
-			Text: params.Log,
+			Text:  params.Log,
 		},
 	}
 	return &SlackMsg{
-		Text: "ちっちゃくないもん！",
-		Username: SLACK_USERNAME,
-		IconUrl: SLACK_ICON_URL,
-		Channel: SLACK_CHANNEL,
+		Text:        "ちっちゃくないもん！",
+		Username:    SLACK_USERNAME,
+		IconUrl:     SLACK_ICON_URL,
+		Channel:     SLACK_CHANNEL,
 		Attachments: attachments,
 	}
 }

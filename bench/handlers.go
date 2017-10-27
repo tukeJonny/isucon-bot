@@ -1,9 +1,20 @@
 package bench
 
+import (
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"os/exec"
+
+	"github.com/julienschmidt/httprouter"
+	"github.com/tukejonny/isucon-bot/slack"
+)
+
 var (
 	BenchmarkLock bool // ベンチマークロックが確保可能であるか判別するためにsync.Mutexを用いない
 
-	basePath = "/home/isucon/isubata/bench"
+	basePath   = "/home/isucon/isubata/bench"
 	resultPath = "/home/isucon/isubata/bench/result.json"
 )
 
@@ -31,7 +42,7 @@ func benchmark() {
 		panic(err)
 	}
 
-	SendSlack(result.GetSlackMsg())
+	slack.SendSlack(result.GetSlackMsg())
 }
 
 func BenchmarkHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {

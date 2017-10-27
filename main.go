@@ -1,5 +1,11 @@
 package main
 
+import (
+	"net/http"
+
+	"github.com/julienschmidt/httprouter"
+)
+
 func initRouter() (router *httpRouter.Router) {
 	router = httprouter.New()
 	router.POST("/bench", benchHandler)

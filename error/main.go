@@ -1,3 +1,12 @@
+package error
+
+import (
+	"fmt"
+	"net/http"
+	"net/url"
+
+	"github.com/pkg/errors"
+)
 
 func notifyError(err error, file string, function string, message string) {
 	var msg string = fmt.Sprintf("%s:%s: %s.", file, function, message)

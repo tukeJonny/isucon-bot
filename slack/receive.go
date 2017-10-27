@@ -1,5 +1,11 @@
 package slack
 
+import (
+	"io/ioutil"
+	"net/http"
+	"net/url"
+)
+
 func AuthSlackToken(r *http.Request) {
 	result, err := ioutil.ReadAll(r.Body)
 	if err != nil {

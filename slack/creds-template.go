@@ -1,3 +1,5 @@
+package slack
+
 // This source code is template.
 // Please change me!
 const (
