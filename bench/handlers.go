@@ -2,6 +2,7 @@ package bench
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -42,6 +43,7 @@ func benchmark(target string) {
 		slack.NotifyErr(err, "handlers.go", "benchmark", "result.jsonのUnmarshalize中でエラーが起きました")
 		panic(err)
 	}
+	WriteBenchLog(result)
 
 	// Make message
 	slackMsg := result.GetSlackMsg()
@@ -62,6 +64,9 @@ func BenchmarkHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param
 		slack.AuthSlackToken(params)
 
 		userParameters := strings.Split(params["text"][0], " ")
+		if len(userParameters) < 2 {
+			slack.NotifyErr(errors.New("there is no targets"), "handlers.go", "BenchmarkHandler", "ベンチマーク対象を指定してください")
+		}
 		target := benchTargets[userParameters[1]]
 
 		go func() {
