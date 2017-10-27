@@ -1,0 +1,13 @@
+[Unit]
+Description = isucon5q bench
+
+[Service]
+User = isucon
+Group = isucon
+ExecStart = /home/isucon/Go/src/github.com/tukejonny/bot/bot
+Restart = always
+Type = simple
+LimitNOFILE = 65536
+
+[Install]
+WantedBy = multi-user.target
