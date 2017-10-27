@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/tukejonny/isucon-bot/slack"
@@ -18,7 +19,7 @@ var (
 	resultPath = "/home/isucon/isubata/bench/result.json"
 )
 
-func benchmark() {
+func benchmark(target string) {
 	// Execute benchmark
 	os.Chdir(basePath)
 	_, err := exec.Command("./bin/bench", "-remotes", "192.168.0.10", "-output", "result.json").Output()
@@ -57,10 +58,15 @@ func BenchmarkHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param
 	if BenchmarkLock {
 		slack.RespondSlack(w, "まだ実行中です♪ もうちょっと待ってね!")
 	} else {
-		slack.AuthSlackToken(r)
+		params := slack.GetSlackParams(r)
+		slack.AuthSlackToken(params)
+
+		userParameters := strings.Split(params["text"][0], " ")
+		target := benchTargets[userParameters[1]]
+
 		go func() {
 			BenchmarkLock = true
-			benchmark()
+			benchmark(target)
 			BenchmarkLock = false
 		}()
 		slack.RespondSlack(w, "ベンチマークを走らせています♪")
