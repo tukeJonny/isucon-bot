@@ -67,7 +67,14 @@ func BenchmarkHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param
 		if len(userParameters) < 2 {
 			slack.NotifyErr(errors.New("there is no targets"), "handlers.go", "BenchmarkHandler", "ベンチマーク対象を指定してください")
 		}
-		target := benchTargets[userParameters[1]]
+		targets := userParameters[1:]
+
+		var target string
+		if len(targets) > 1 {
+			target = strings.Join(targets, ",")
+		} else {
+			target = targets[0]
+		}
 
 		go func() {
 			BenchmarkLock = true
