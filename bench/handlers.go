@@ -71,9 +71,12 @@ func BenchmarkHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param
 
 		var target string
 		if len(targets) > 1 {
+			for i := 0; i < len(targets); i++ {
+				targets[i] = benchTargets[targets[i]]
+			}
 			target = strings.Join(targets, ",")
 		} else {
-			target = targets[0]
+			target = benchTargets[targets[0]]
 		}
 
 		go func() {
