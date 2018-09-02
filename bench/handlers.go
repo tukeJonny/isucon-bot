@@ -61,7 +61,7 @@ func BenchmarkHandler(w http.ResponseWriter, r *http.Request, _ httprouter.Param
 		slack.RespondSlack(w, "まだ実行中です♪ もうちょっと待ってね!")
 	} else {
 		params := slack.GetSlackParams(r)
-		slack.AuthSlackToken(params)
+		// slack.AuthSlackToken(params)
 
 		userParameters := strings.Split(params["text"][0], " ")
 		if len(userParameters) < 2 {
